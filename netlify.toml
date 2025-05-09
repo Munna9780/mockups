@@ -9,7 +9,10 @@
 [[plugins]]
   package = "@netlify/plugin-nextjs"
 
+# Handle Next.js routing
 [[redirects]]
   from = "/*"
-  to = "/index.html"
-  status = 200 
+  to = "/_netlify_handler"
+  status = 200
+  force = true
+  conditions = {Path = ["/*"]} 

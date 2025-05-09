@@ -5,6 +5,12 @@ const nextConfig = {
     domains: ['localhost'],
     formats: ['image/avif', 'image/webp'],
     unoptimized: true,
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**',
+      },
+    ],
   },
   webpack: (config) => {
     config.externals = [...config.externals, { canvas: 'canvas' }];
@@ -21,7 +27,6 @@ const nextConfig = {
   // Netlify specific
   target: 'server',
   distDir: '.next',
-  assetPrefix: process.env.NODE_ENV === 'production' ? '.' : '',
 }
 
 module.exports = nextConfig 
