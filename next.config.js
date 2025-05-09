@@ -18,6 +18,10 @@ const nextConfig = {
   pageExtensions: ['tsx', 'ts', 'jsx', 'js'],
   poweredByHeader: false,
   compress: true,
+  // Netlify specific
+  target: 'server',
+  distDir: '.next',
+  assetPrefix: process.env.NODE_ENV === 'production' ? '.' : '',
 }
 
 module.exports = nextConfig 
