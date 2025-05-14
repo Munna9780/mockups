@@ -103,10 +103,12 @@ export default function Designer() {
     }
   }
 
-  const searchParams = useSearchParams();
-  templateId = searchParams ? searchParams.get('template') : null;
-  templateType = searchParams ? (searchParams.get('type') as 'tshirt' | 'hoodie' | 'polo' | null) : null;
-  templateView = searchParams ? (searchParams.get('view') as 'front' | 'back' | 'side' | null) : null;
+  <Suspense fallback={<div>Loading...</div>}>
+    const searchParams = useSearchParams();
+    templateId = searchParams ? searchParams.get('template') : null;
+    templateType = searchParams ? (searchParams.get('type') as 'tshirt' | 'hoodie' | 'polo' | null) : null;
+    templateView = searchParams ? (searchParams.get('view') as 'front' | 'back' | 'side' | null) : null;
+  </Suspense>
 
   if (isLoading) {
     return (
