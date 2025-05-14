@@ -103,6 +103,11 @@ export default function Designer() {
     }
   }
 
+  const searchParams = useSearchParams();
+  templateId = searchParams ? searchParams.get('template') : null;
+  templateType = searchParams ? (searchParams.get('type') as 'tshirt' | 'hoodie' | 'polo' | null) : null;
+  templateView = searchParams ? (searchParams.get('view') as 'front' | 'back' | 'side' | null) : null;
+
   if (isLoading) {
     return (
       <div className="min-h-screen bg-gray-100 flex items-center justify-center">
@@ -157,13 +162,6 @@ export default function Designer() {
 
             {/* Controls */}
             <div className="w-80 space-y-6">
-              <Suspense fallback={<div>Loading...</div>}>
-                const searchParams = useSearchParams();
-                templateId = searchParams ? searchParams.get('template') : null;
-                templateType = searchParams ? (searchParams.get('type') as 'tshirt' | 'hoodie' | 'polo' | null) : null;
-                templateView = searchParams ? (searchParams.get('view') as 'front' | 'back' | 'side' | null) : null;
-              </Suspense>
-
               {templateType && (
                 <ClothingTemplate
                   canvas={canvas}
