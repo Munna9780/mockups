@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, Suspense } from 'react'
 import { fabric } from 'fabric'
 import { useDropzone } from 'react-dropzone'
 import { useSearchParams } from 'next/navigation'
@@ -12,10 +12,10 @@ export default function Designer() {
   const [canvas, setCanvas] = useState<fabric.Canvas | null>(null)
   const [selectedObject, setSelectedObject] = useState<fabric.Object | null>(null)
   const [isLoading, setIsLoading] = useState(true)
-  const searchParams = useSearchParams()
-  const templateId = searchParams.get('template')
-  const templateType = searchParams.get('type') as 'tshirt' | 'hoodie' | 'polo' | null
-  const templateView = searchParams.get('view') as 'front' | 'back' | 'side' | null
+
+  let templateId: string | null = null;
+  let templateType: 'tshirt' | 'hoodie' | 'polo' | null = null;
+  let templateView: 'front' | 'back' | 'side' | null = null;
 
   const { getRootProps, getInputProps } = useDropzone({
     accept: {
@@ -157,6 +157,13 @@ export default function Designer() {
 
             {/* Controls */}
             <div className="w-80 space-y-6">
+              <Suspense fallback={<div>Loading...</div>}>
+                const searchParams = useSearchParams();
+                templateId = searchParams ? searchParams.get('template') : null;
+                templateType = searchParams ? (searchParams.get('type') as 'tshirt' | 'hoodie' | 'polo' | null) : null;
+                templateView = searchParams ? (searchParams.get('view') as 'front' | 'back' | 'side' | null) : null;
+              </Suspense>
+
               {templateType && (
                 <ClothingTemplate
                   canvas={canvas}
