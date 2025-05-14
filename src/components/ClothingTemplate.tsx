@@ -198,40 +198,10 @@ export default function ClothingTemplate({ canvas, type, view }: ClothingTemplat
               className="hidden"
               id="design-upload"
             />
-            <label
-              htmlFor="design-upload"
-              className="cursor-pointer block"
-            >
-              <div className="flex flex-col items-center gap-2">
-                <svg
-                  className="w-8 h-8 text-gray-400"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
-                  />
-                </svg>
-                <span className="text-sm text-gray-600">
-                  Drag and drop your design here, or click to browse
-                </span>
-              </div>
+            <label htmlFor="design-upload" className="cursor-pointer">
+              <span className="text-gray-500">Click to upload your design</span>
             </label>
           </div>
-          {uploadedDesign && (
-            <div className="relative aspect-video rounded-lg overflow-hidden">
-              <ImageLoader
-                src={uploadedDesign}
-                alt="Uploaded design"
-                fill
-                className="object-contain"
-              />
-            </div>
-          )}
         </div>
       </div>
     </div>
